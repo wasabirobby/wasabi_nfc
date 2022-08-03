@@ -1,6 +1,6 @@
 # Wasabi's NFC Transfer
 
-This resource was created per request as a free ESX script for transfering money between player's bank accounts while giving the effect of NFC(I.e. The phone requirement)
+This resource was created per request as a free ESX script for transfering money between player's bank accounts while giving the effect of NFC.
 
 <b>Features:</b>
 - Exploit free
