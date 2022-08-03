@@ -5,6 +5,7 @@ This resource was created per request as a free ESX script for transfering money
 <b>Features:</b>
 - Exploit free
 - 0.00ms usage
+- Cellphone prop and animations
 - Ability to target others around you and transfer money instantly from one bank account to the other
 - Requirement to have phone in inventory(Configurable)
 - Configurable max transfers
