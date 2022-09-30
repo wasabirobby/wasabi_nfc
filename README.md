@@ -27,6 +27,5 @@ This resource was created per request as a free ESX script for transfering money
 ## Preview
 - Video Preview: https://www.youtube.com/watch?v=VYcIU3-51tY
 
-
 # Support
-Join our discord <a href='https://discord.gg/XJFNyMy3Bv'>HERE</a> for additional scripts and support!
+<a href='https://discord.gg/79zjvy4JMs'>![Discord Banner 2](https://discordapp.com/api/guilds/1025493337031049358/widget.png?style=banner2)</a>
