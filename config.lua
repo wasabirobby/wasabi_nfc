@@ -18,7 +18,7 @@ Strings = {
 
     ['no_phone'] = "No Phone",
     ['no_phone_desc'] = "You must have a phone to do this!",
-    
+
     ['error'] = "Error",
     ['error_no_funds'] = "You don\'t have the funds for this transaction!",
     ['error_no_nearby'] = "No nearby players",
@@ -26,6 +26,4 @@ Strings = {
     ['error_invalid_amount'] = "Invalid Amount!",
 
     ['amount'] = "Amount",
-
-
 }
