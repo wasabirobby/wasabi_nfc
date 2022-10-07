@@ -66,7 +66,6 @@ deletePhoneObj = function()
 	end
 end
 
-
 AddEventHandler('wasabi_nfc:startTransfer', function()
     ESX.TriggerServerCallback('wasabi_nfc:checkPhone', function(cb)
         if cb then

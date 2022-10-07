@@ -28,5 +28,5 @@ Strings = {
     ['error_transfer_limit'] = "The amount entered was above the transfer limit!",
     ['error_invalid_amount'] = "Invalid Amount!",
 
-    ['amount'] = "Amount",
+    ['amount'] = "Amount"
 }
