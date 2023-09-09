@@ -71,6 +71,7 @@ CreateCallback('wasabi_nfc:confirmPayment', function(source, cb, id, amount)
             TriggerClientEvent('nfc:notifyReceiver', id, xName, amount)
             cb(zName)
         end    
+    end
 end)
 
 addCommas = function(n)
