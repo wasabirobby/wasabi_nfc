@@ -1,8 +1,22 @@
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/wasabiscripts  -------------
 ---------------------------------------------------------------
+if Config.Framework == 'esx' then 
+    ESX = exports.es_extended:getSharedObject()
+elseif Config.Framework == 'qbcore' then
+    QBCore = exports['qb-core']:GetCoreObject()
+end
 
-ESX = exports['es_extended']:getSharedObject()
+
+Callback = function(name, ...)
+    if Config.Framework == 'esx' then 
+        ESX.TriggerServerCallback(name, ...)
+    elseif Config.Framework == 'qbcore' then
+        QBCore.Functions.TriggerCallback(name, ...)
+    end
+end
+
+
 local phoneObj = nil
 local phoneModel = -1038739674
 
@@ -67,7 +81,7 @@ deletePhoneObj = function()
 end
 
 AddEventHandler('wasabi_nfc:startTransfer', function()
-    ESX.TriggerServerCallback('wasabi_nfc:checkPhone', function(cb)
+    Callback('wasabi_nfc:checkPhone', function(cb)
         if cb then
             openTransferDialog()
         else
@@ -89,7 +103,7 @@ transferFunds = function(amount)
     local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
     if closestPlayer ~= -1 and closestDistance <= 2 then
         local targetId = GetPlayerServerId(closestPlayer)
-        ESX.TriggerServerCallback('wasabi_nfc:confirmPayment', function(cb) 
+        Callback('wasabi_nfc:confirmPayment', function(cb) 
             if cb then
                 lib.alertDialog({
                     header = Strings['money_sent'],

@@ -2,35 +2,75 @@
 --------------- https://discord.gg/wasabiscripts  -------------
 ---------------------------------------------------------------
 
-ESX = exports['es_extended']:getSharedObject()
+if Config.Framework == 'esx' then 
+    ESX = exports.es_extended:getSharedObject()
+elseif Config.Framework == 'qbcore' then
+    QBCore = exports['qb-core']:GetCoreObject()
+end
 
-ESX.RegisterServerCallback('wasabi_nfc:checkPhone', function(source, cb)
+CreateCallback = function(name, cb)
+    if Config.Framework == 'esx' then 
+        ESX.RegisterServerCallback(name, cb)
+    elseif Config.Framework == 'qbcore' then
+        QBCore.Functions.CreateCallback(name, cb)
+    end
+end
+
+
+CreateCallback('wasabi_nfc:checkPhone', function(source, cb)
     if not Config.PhoneItem then
         cb(true)
     else
-        local xPlayer = ESX.GetPlayerFromId(source)
-        local xItem = xPlayer.getInventoryItem(Config.PhoneItem)
-        if xItem.count > 0 then
-            cb(true)
+        if Config.Framework == 'esx' then  
+            local xPlayer = ESX.GetPlayerFromId(source)
+            local xItem = xPlayer.getInventoryItem(Config.PhoneItem)
+            if xItem.count > 0 then
+                cb(true)
+            else
+                cb(false)
+            end
         else
-            cb(false)
+            local Player = QBCore.Functions.GetPlayer(source)
+            local phoneItem = Player.Functions.GetItemByName(Config.PhoneItem)
+            if phoneItem and phoneItem.amount > 0 then
+                cb(true)
+            else
+                cb(false)
+            end
         end
     end
 end)
 
-ESX.RegisterServerCallback('wasabi_nfc:confirmPayment', function(source, cb, id, amount)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local xName = xPlayer.getName()
-    local zPlayer = ESX.GetPlayerFromId(id)
-    local zName = zPlayer.getName()
-    local xBank = xPlayer.getAccount('bank').money
-    if xBank < amount then
-        cb(false)
+CreateCallback('wasabi_nfc:confirmPayment', function(source, cb, id, amount)
+    if Config.Framework == 'esx' then 
+        local xPlayer = ESX.GetPlayerFromId(source)
+        local xName = xPlayer.getName()
+        local zPlayer = ESX.GetPlayerFromId(id)
+        local zName = zPlayer.getName()
+        local xBank = xPlayer.getAccount('bank').money
+        if xBank < amount then
+            cb(false)
+        else
+            xPlayer.removeAccountMoney('bank', amount)
+            zPlayer.addAccountMoney('bank', amount)
+            TriggerClientEvent('wasabi_nfc:notifyReceiver', id, xName, amount)
+            cb(zName)
+        end
     else
-        xPlayer.removeAccountMoney('bank', amount)
-        zPlayer.addAccountMoney('bank', amount)
-        TriggerClientEvent('wasabi_nfc:notifyReceiver', id, xName, amount)
-        cb(zName)
+        local xPlayer = QBCore.Functions.GetPlayer(source)
+        local xName = xPlayer.PlayerData.name
+        local zPlayer = QBCore.Functions.GetPlayer(id)
+        local zName = zPlayer.PlayerData.name
+        local xBank = xPlayer.PlayerData.money["bank"]
+        
+        if xBank < amount then
+            cb(false)
+        else
+            xPlayer.Functions.RemoveMoney('bank', amount)
+            zPlayer.Functions.AddMoney('bank', amount)
+            TriggerClientEvent('nfc:notifyReceiver', id, xName, amount)
+            cb(zName)
+        end    
     end
 end)
 
