@@ -25,5 +25,4 @@ shared_scripts {
 
 dependencies {
   'ox_lib',
-  'qtarget'
 }
