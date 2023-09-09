@@ -4,6 +4,8 @@
 
 Config = {}
 
+Config.Framework = 'qbcore' -- esx/qbcore
+
 Config.checkForUpdates = true -- Check for Updates?
 
 Config.PhoneItem = 'phone' -- Item required to have to NFC transfer(Phone by default. Can be set to 'false' if phone requirement not desired.)
