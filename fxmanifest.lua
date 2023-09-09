@@ -5,7 +5,7 @@
 fx_version "cerulean"
 game "gta5"
 
-description 'Wasabi ESX Target NFC Script'
+description 'Wasabi Target NFC Script'
 version '1.0.1'
 
 lua54 'yes'
@@ -24,7 +24,6 @@ shared_scripts {
 }
 
 dependencies {
-  'es_extended',
   'ox_lib',
   'qtarget'
 }
